@@ -16,17 +16,28 @@ const CATEGORY_CONFIG = [
   { key: 'shopping', label: 'Shopping', color: '#F97316' },
 ] as const;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function renderCustomLabel(props: any) {
-  const { cx, cy, midAngle, innerRadius, outerRadius, percent } = props as {
-    cx: number;
-    cy: number;
-    midAngle: number;
-    innerRadius: number;
-    outerRadius: number;
-    percent: number;
-  };
-  if (!percent || percent < 0.05) return null;
+interface CustomLabelProps {
+  cx?: number;
+  cy?: number;
+  midAngle?: number;
+  innerRadius?: number;
+  outerRadius?: number;
+  percent?: number;
+}
+
+function renderCustomLabel(props: CustomLabelProps) {
+  const { cx, cy, midAngle, innerRadius, outerRadius, percent } = props;
+  if (
+    percent === undefined ||
+    percent < 0.05 ||
+    cx === undefined ||
+    cy === undefined ||
+    midAngle === undefined ||
+    innerRadius === undefined ||
+    outerRadius === undefined
+  ) {
+    return null;
+  }
   const RADIAN = Math.PI / 180;
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);

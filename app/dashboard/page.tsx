@@ -79,7 +79,7 @@ export default function DashboardPage() {
 
           {/* Monthly Score Card */}
           <div className="animate-fade-in-up glass-card p-6" style={{ animationDelay: '0.15s' }}>
-            <h3 className="mb-4 text-sm font-medium text-slate-400">Monthly Breakdown</h3>
+            <h2 className="mb-4 text-sm font-medium text-slate-400">Monthly Breakdown</h2>
             <div className="mb-6 flex items-baseline gap-2">
               <span className="text-4xl font-bold text-white">{result.monthlyKg.toLocaleString()}</span>
               <span className="text-sm text-slate-400">kg CO₂/month</span>
@@ -119,7 +119,7 @@ export default function DashboardPage() {
 
         {/* Donut Chart */}
         <div className="animate-fade-in-up mt-6 glass-card p-6" style={{ animationDelay: '0.2s' }}>
-          <h3 className="mb-2 text-lg font-semibold text-white">Emissions Breakdown</h3>
+          <h2 className="mb-2 text-lg font-semibold text-white">Emissions Breakdown</h2>
           <p className="mb-4 text-sm text-slate-400">Visual distribution of your carbon footprint by category</p>
           <CarbonDonutChart breakdown={result.breakdown} totalKg={result.totalKgPerYear} />
         </div>

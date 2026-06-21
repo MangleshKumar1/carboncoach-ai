@@ -18,6 +18,11 @@ describe('calculateTransportEmissions', () => {
     expect(calculateTransportEmissions(100, 'car')).toBe(1092);
   });
 
+  test('calculates transport emissions for high values correctly', () => {
+    // 1000 km/week * 52 * 0.21 = 10920
+    expect(calculateTransportEmissions(1000, 'car')).toBe(10920);
+  });
+
   test('calculates bus emissions correctly', () => {
     // 100 km/week * 52 * 0.089 = 462.8
     expect(calculateTransportEmissions(100, 'bus')).toBe(462.8);
@@ -47,6 +52,11 @@ describe('calculateElectricityEmissions', () => {
   test('calculates electricity emissions correctly', () => {
     // 200 units/month * 12 * 0.82 = 1968
     expect(calculateElectricityEmissions(200)).toBe(1968);
+  });
+
+  test('calculates electricity emissions for high values correctly', () => {
+    // 500 units/month * 12 * 0.82 = 4920
+    expect(calculateElectricityEmissions(500)).toBe(4920);
   });
 
   test('returns 0 for zero units', () => {
@@ -84,6 +94,15 @@ describe('calculateFlightEmissions', () => {
     expect(calculateFlightEmissions(4)).toBe(1020);
   });
 
+  test('returns 0 for zero flights', () => {
+    expect(calculateFlightEmissions(0)).toBe(0);
+  });
+
+  test('calculates flight emissions for high values correctly', () => {
+    // 10 flights * 255 = 2550
+    expect(calculateFlightEmissions(10)).toBe(2550);
+  });
+
   test('throws error for negative flights', () => {
     expect(() => calculateFlightEmissions(-1)).toThrow(
       'Flights per year cannot be negative'
@@ -97,6 +116,10 @@ describe('calculateShoppingEmissions', () => {
   test('calculates shopping emissions correctly', () => {
     // 5000 * 12 * 0.0025 = 150
     expect(calculateShoppingEmissions(5000)).toBe(150);
+  });
+
+  test('returns 0 for zero spend', () => {
+    expect(calculateShoppingEmissions(0)).toBe(0);
   });
 
   test('throws error for negative spend', () => {

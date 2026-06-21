@@ -150,24 +150,29 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 | `npm test` | Run all tests |
 | `npm run test:coverage` | Run tests with coverage report |
 
----
+### Security
+- All API keys server-side only (never in client bundle)
+- Security headers: X-Frame-Options DENY, X-Content-Type-Options nosniff, X-XSS-Protection, Referrer-Policy, and Permissions-Policy
+- Input validation and sanitization on all API routes
+- Rate limiting: 10 requests/day per session
 
-## 🧪 Testing
+### Accessibility
+WCAG 2.1 AA compliant:
+- Skip to main content link
+- All form inputs have associated labels
+- aria-live regions for dynamic content updates
+- Full keyboard navigation support
+- Focus-visible indicators on all interactive elements
+- Semantic heading hierarchy (h1→h2→h3)
 
-The project includes **14 unit tests** covering:
-
-- ✅ Transport emission calculations (car, bus, train modes)
-- ✅ Electricity emission calculations
-- ✅ Food emission calculations (vegan, vegetarian, non-veg)
-- ✅ Flight emission calculations
-- ✅ Shopping emission calculations
-- ✅ Carbon category classification (low/medium/high)
-- ✅ Input validation (negative value rejection)
-- ✅ Full calculation pipeline end-to-end
-
-```bash
-npm test
-```
+### Testing
+Run: npm test
+Covers:
+- All carbon calculation functions + edge cases
+- Input validation (negative values, zero values)
+- API route: success, failure, validation
+- AI provider fallback: OpenRouter → Gemini verified
+- Separation of concerns: route tests vs provider tests
 
 ## 🌐 Deployment
 

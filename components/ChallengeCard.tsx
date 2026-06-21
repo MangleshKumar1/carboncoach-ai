@@ -36,7 +36,7 @@ export default function ChallengeCard({ challenge, progress, onToggleToday }: Ch
               {challenge.icon}
             </span>
             <div>
-              <h3 className="font-semibold text-white">{challenge.title}</h3>
+              <h2 className="font-semibold text-white">{challenge.title}</h2>
               <span
                 className="inline-block rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider"
                 style={{ backgroundColor: `${categoryColor}20`, color: categoryColor }}

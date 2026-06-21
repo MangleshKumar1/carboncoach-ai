@@ -28,8 +28,8 @@ export default function ScoreGauge({ totalKg, category, indiaAvgKg = 1900 }: Sco
       {/* Score header */}
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-medium text-slate-400">Your Annual Carbon Score</h3>
-          <div className="mt-1 flex items-baseline gap-2">
+          <h2 className="text-sm font-medium text-slate-400">Your Annual Carbon Score</h2>
+          <div className="mt-1 flex items-baseline gap-2" aria-live="polite">
             <span className="text-4xl font-bold text-white">{totalKg.toLocaleString()}</span>
             <span className="text-sm text-slate-400">kg CO₂/year</span>
           </div>

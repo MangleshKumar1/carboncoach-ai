@@ -227,7 +227,8 @@ export default function AiCoachPage() {
         <div
           ref={scrollRef}
           className="animate-fade-in flex-1 overflow-y-auto rounded-2xl border border-white/10 bg-slate-900/50 p-4"
-          role="list"
+          role="log"
+          aria-live="polite"
           aria-label="Chat messages"
           style={{ maxHeight: 'calc(100vh - 320px)', minHeight: '400px' }}
         >
@@ -236,7 +237,7 @@ export default function AiCoachPage() {
           ))}
           {isLoading && <TypingIndicator />}
           {error && !isLoading && (
-            <div className="mb-4 rounded-lg border border-red-500/20 bg-red-500/10 p-3 text-sm text-red-400" role="alert">
+            <div className="mb-4 rounded-lg border border-red-500/20 bg-red-500/10 p-3 text-sm text-red-400" role="alert" aria-live="polite">
               ⚠️ {error}
             </div>
           )}
@@ -260,8 +261,12 @@ export default function AiCoachPage() {
 
         {/* Input */}
         <form onSubmit={handleSubmit} className="mt-4 flex gap-3">
+          <label htmlFor="chat-input" className="sr-only">
+            Message
+          </label>
           <input
             ref={inputRef}
+            id="chat-input"
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}

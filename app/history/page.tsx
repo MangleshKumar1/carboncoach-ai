@@ -153,7 +153,7 @@ export default function HistoryPage() {
 
             {/* Line Chart */}
             <div className="glass-card p-6">
-              <h3 className="mb-4 text-lg font-semibold text-white">Carbon Timeline</h3>
+              <h2 className="mb-4 text-lg font-semibold text-white">Carbon Timeline</h2>
               <div className="h-72 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart
@@ -202,7 +202,7 @@ export default function HistoryPage() {
             {/* History Table */}
             <div className="glass-card overflow-hidden">
               <div className="px-6 py-4 border-b border-white/5">
-                <h3 className="text-lg font-semibold text-white">History Details</h3>
+                <h2 className="text-lg font-semibold text-white">History Details</h2>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-slate-300">

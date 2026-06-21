@@ -180,9 +180,9 @@ export default function ReportPage() {
 
             {/* Wins */}
             <div className="glass-card p-6">
-              <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-emerald-400">
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-emerald-400">
                 🎉 Wins
-              </h3>
+              </h2>
               <ul className="space-y-3">
                 {latestReport.wins.map((win, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-slate-300">
@@ -197,9 +197,9 @@ export default function ReportPage() {
 
             {/* Losses */}
             <div className="glass-card p-6">
-              <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-amber-400">
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-amber-400">
                 ⚠️ Areas to Improve
-              </h3>
+              </h2>
               <ul className="space-y-3">
                 {latestReport.losses.map((loss, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-slate-300">
@@ -214,9 +214,9 @@ export default function ReportPage() {
 
             {/* Recommendations */}
             <div className="glass-card p-6">
-              <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-blue-400">
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-blue-400">
                 💡 Recommendations
-              </h3>
+              </h2>
               <ul className="space-y-3">
                 {latestReport.recommendations.map((rec, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-slate-300">
@@ -242,7 +242,7 @@ export default function ReportPage() {
         {/* Report History */}
         {reports.length > 1 && (
           <div className="mt-10">
-            <h3 className="mb-4 text-lg font-semibold text-white">Past Reports</h3>
+            <h2 className="mb-4 text-lg font-semibold text-white">Past Reports</h2>
             <div className="space-y-3">
               {reports.slice(1).map((report) => (
                 <div key={report.id} className="glass-card flex items-center justify-between p-4">
