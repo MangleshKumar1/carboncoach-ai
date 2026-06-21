@@ -16,7 +16,9 @@ function getItem<T>(key: string): T | null {
     const raw = localStorage.getItem(key);
     if (!raw) return null;
     return JSON.parse(raw) as T;
-  } catch {
+  } catch (error: unknown) {
+    // Return null if JSON parsing or reading localStorage fails (e.g. invalid format or security settings)
+    console.warn(`Failed to read key "${key}" from localStorage:`, error);
     return null;
   }
 }
@@ -25,8 +27,9 @@ function setItem<T>(key: string, value: T): void {
   if (typeof window === 'undefined') return;
   try {
     localStorage.setItem(key, JSON.stringify(value));
-  } catch {
-    // Fail silently in production
+  } catch (error: unknown) {
+    // Fail silently in production if quota is exceeded or storage access is blocked by the user
+    console.warn(`Failed to write key "${key}" to localStorage:`, error);
   }
 }
 

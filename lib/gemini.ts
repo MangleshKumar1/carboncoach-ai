@@ -18,6 +18,14 @@ const DEFAULT_CARBON_RESULT: CarbonResult = {
  * Client-side wrapper for getting carbon coach responses via server-side /api/chat route.
  * Prevents client exposure of any AI keys.
  */
+/**
+ * Contacts the server-side API endpoint to obtain carbon coaching advice based on user question and current footprint data.
+ *
+ * @param message - The text of the user's question.
+ * @param context - The user's computed carbon result used for custom prompt personalization.
+ * @returns A promise resolving to the coach response text.
+ * @throws {Error} If the server responds with a non-200 HTTP code or fails to process the request.
+ */
 export async function getCarbonCoachResponse(
   message: string,
   context: CarbonResult | null
@@ -41,8 +49,13 @@ export async function getCarbonCoachResponse(
 }
 
 /**
- * Client-side wrapper for generating weekly sustainability reports via server-side /api/chat route.
- * Prevents client exposure of any AI keys.
+ * Creates a structured sustainability report prompt containing user statistics and challenge progress
+ * and sends it to the server-side API to return custom wins, losses, and actionable tips.
+ *
+ * @param carbonData - The computed carbon result containing sector-wise footprint allocations.
+ * @param challenges - The progress list of the 30-day eco-challenges.
+ * @returns A promise resolving to the formatted weekly report JSON payload string.
+ * @throws {Error} If the server responds with an error status or fails to generate the report.
  */
 export async function generateWeeklyReport(
   carbonData: CarbonResult | null,

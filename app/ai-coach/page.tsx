@@ -83,8 +83,9 @@ export default function AiCoachPage() {
         if (parsed.date === today) {
           limit = parsed;
         }
-      } catch {
-        // Fail silently
+      } catch (error: unknown) {
+        // Fallback silently if rateLimitData has a corrupt format and keep default limits
+        console.warn('Failed to parse rate limit data:', error);
       }
     }
 
@@ -150,7 +151,9 @@ export default function AiCoachPage() {
       };
       setMessages((prev) => [...prev, aiMessage]);
       appendChatMessage(aiMessage);
-    } catch {
+    } catch (error: unknown) {
+      // Fallback UI rendering if fetching /api/chat route fails
+      console.error('Chat API request failed:', error);
       const friendlyError = 'CarbonCoach is taking a break. Try again in a moment.';
       setError(friendlyError);
 

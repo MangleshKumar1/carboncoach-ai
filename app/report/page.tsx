@@ -31,9 +31,12 @@ export default function ReportPage() {
 
       let parsed: { wins: string[]; losses: string[]; recommendations: string[]; overallScore: number };
       try {
+        // Clean the response — remove markdown code fences if present
         const cleaned = rawResponse.replace(/```json?\n?/g, '').replace(/```/g, '').trim();
         parsed = JSON.parse(cleaned);
-      } catch {
+      } catch (error: unknown) {
+        // Fallback report structure if JSON parsing of AI output fails (e.g., if response format changes or model output drifts)
+        console.warn('Failed to parse weekly report JSON, using fallback data. Error details:', error);
         parsed = {
           wins: ['Report generated successfully'],
           losses: ['Could not parse structured data'],
@@ -54,7 +57,7 @@ export default function ReportPage() {
 
       saveReport(report);
       setReports((prev) => [report, ...prev]);
-    } catch (err) {
+    } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to generate report');
     } finally {
       setGenerating(false);

@@ -36,8 +36,13 @@ const INDIA_AVG_KG_PER_YEAR = 1900; // 1.9 tons
 // ── Calculation Functions ──
 
 /**
- * Calculate annual transport emissions in kg CO2
- * Formula: km_per_week * 52 weeks * emission_factor
+ * Calculates the annual transport emissions in kg CO₂ based on weekly distance and vehicle mode.
+ * Formula: kmPerWeek * 52 weeks * emission_factor
+ *
+ * @param kmPerWeek - The average distance traveled per week in kilometers.
+ * @param mode - The vehicle mode of transport ('car', 'bus', 'train').
+ * @returns The calculated annual emissions in kg CO₂.
+ * @throws {Error} If kmPerWeek is negative.
  */
 export function calculateTransportEmissions(
   kmPerWeek: number,
@@ -48,8 +53,12 @@ export function calculateTransportEmissions(
 }
 
 /**
- * Calculate annual electricity emissions in kg CO2
- * Formula: units_per_month * 12 * 0.82
+ * Calculates the annual electricity emissions in kg CO₂ based on monthly electricity consumption in units (kWh).
+ * Formula: unitsPerMonth * 12 months * 0.82 kg CO₂/unit (India grid factor)
+ *
+ * @param unitsPerMonth - The average electricity consumption per month in kWh.
+ * @returns The calculated annual emissions in kg CO₂.
+ * @throws {Error} If unitsPerMonth is negative.
  */
 export function calculateElectricityEmissions(unitsPerMonth: number): number {
   if (unitsPerMonth < 0) throw new Error('Electricity units cannot be negative');
@@ -57,15 +66,23 @@ export function calculateElectricityEmissions(unitsPerMonth: number): number {
 }
 
 /**
- * Calculate annual food emissions in kg CO2
+ * Calculates the annual diet-related emissions in kg CO₂ based on food style.
+ * Fixed coefficients: vegan: 1500, vegetarian: 2500, non-veg: 4500.
+ *
+ * @param foodType - The diet style ('vegan', 'vegetarian', 'non-veg').
+ * @returns The annual diet-related emissions in kg CO₂.
  */
 export function calculateFoodEmissions(foodType: FoodType): number {
   return FOOD_EMISSIONS[foodType];
 }
 
 /**
- * Calculate annual flight emissions in kg CO2
- * Formula: flights_per_year * 255 kg
+ * Calculates the annual aviation emissions in kg CO₂ based on the number of flights.
+ * Formula: flightsPerYear * 255 kg CO₂/flight
+ *
+ * @param flightsPerYear - The number of flights taken per year.
+ * @returns The calculated annual emissions in kg CO₂.
+ * @throws {Error} If flightsPerYear is negative.
  */
 export function calculateFlightEmissions(flightsPerYear: number): number {
   if (flightsPerYear < 0) throw new Error('Flights per year cannot be negative');
@@ -73,8 +90,12 @@ export function calculateFlightEmissions(flightsPerYear: number): number {
 }
 
 /**
- * Calculate annual shopping emissions in kg CO2
- * Formula: spend_per_month * 12 * 2.5 kg
+ * Calculates the annual shopping emissions in kg CO₂ based on monthly spend.
+ * Formula: spendPerMonth * 12 months * 0.0025 kg CO₂/rupee (2.5 kg per ₹1,000 spent)
+ *
+ * @param spendPerMonth - The average monthly shopping spend in rupees.
+ * @returns The calculated annual emissions in kg CO₂.
+ * @throws {Error} If spendPerMonth is negative.
  */
 export function calculateShoppingEmissions(spendPerMonth: number): number {
   if (spendPerMonth < 0) throw new Error('Shopping spend cannot be negative');
@@ -82,7 +103,14 @@ export function calculateShoppingEmissions(spendPerMonth: number): number {
 }
 
 /**
- * Determine carbon category based on total annual kg CO2
+ * Categorizes the annual carbon emissions into 'low', 'medium', or 'high' impact classes.
+ * Thresholds:
+ * - 'low': Under 2,000 kg CO₂/year
+ * - 'medium': 2,000–5,000 kg CO₂/year
+ * - 'high': Above 5,000 kg CO₂/year
+ *
+ * @param totalKgPerYear - The total annual carbon footprint in kg CO₂.
+ * @returns The categorized CarbonCategory ('low' | 'medium' | 'high').
  */
 export function getCarbonCategory(totalKgPerYear: number): CarbonCategory {
   if (totalKgPerYear < 2000) return 'low';
@@ -91,7 +119,10 @@ export function getCarbonCategory(totalKgPerYear: number): CarbonCategory {
 }
 
 /**
- * Calculate complete carbon footprint from all inputs
+ * Computes the complete annual carbon footprint metrics (total, breakdown, category, monthly average, comparison to national average) from all user inputs.
+ *
+ * @param input - The structured CarbonInput domain object containing user transport, diet, energy, flight, and spend inputs.
+ * @returns The computed CarbonResult object containing the full analysis.
  */
 export function calculateTotalEmissions(input: CarbonInput): CarbonResult {
   const breakdown: CarbonBreakdown = {
@@ -124,7 +155,10 @@ export function calculateTotalEmissions(input: CarbonInput): CarbonResult {
 }
 
 /**
- * Validate carbon input fields
+ * Validates the partial carbon inputs to ensure no fields contain negative values.
+ *
+ * @param input - The partial CarbonInput configuration object to validate.
+ * @returns An array of string validation error messages (empty if all values are valid).
  */
 export function validateCarbonInput(input: Partial<CarbonInput>): string[] {
   const errors: string[] = [];

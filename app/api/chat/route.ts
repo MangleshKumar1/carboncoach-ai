@@ -2,7 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getAIResponse } from '@/lib/ai';
 import { CarbonResult } from '@/types/carbon';
 
-export async function POST(request: NextRequest) {
+/**
+ * API route handler for POST requests to "/api/chat".
+ * Validates incoming chat message payloads and queries AI provider orchestrators.
+ *
+ * @param request - The incoming NextRequest containing message and userData properties.
+ * @returns A NextResponse containing the JSON payload with either the resolved response or an error code.
+ */
+export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const body = await request.json().catch(() => ({}));
     const { message, userData } = body as { message: unknown; userData: unknown };
@@ -25,8 +32,9 @@ export async function POST(request: NextRequest) {
     const reply = await getAIResponse(message, userData as CarbonResult);
 
     return NextResponse.json({ response: reply });
-  } catch (error) {
-    console.error('API Chat Route Error:', error);
+  } catch (error: unknown) {
+    const errMsg = error instanceof Error ? error.message : String(error);
+    console.error('API Chat Route Error:', errMsg);
     return NextResponse.json(
       { error: 'CarbonCoach is taking a break. Try again.' },
       { status: 500 }

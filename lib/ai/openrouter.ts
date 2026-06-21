@@ -5,6 +5,15 @@
  * Server-side only — never imported in client components.
  */
 
+/**
+ * Sends a message and a system context prompt to the OpenRouter completion endpoint.
+ *
+ * @param message - The user's prompt or question.
+ * @param systemPrompt - The system instruction prompt detailing persona constraints and carbon context.
+ * @returns A promise that resolves to the generated text content from the AI model.
+ * @throws {Error} If the OPENROUTER_API_KEY environment variable is missing, the HTTP request
+ *                 fails (non-200 status), or the response content structure is malformed.
+ */
 export async function callOpenRouter(
   message: string,
   systemPrompt: string

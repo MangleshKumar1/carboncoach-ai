@@ -7,6 +7,15 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
  * Server-side only — never imported in client components.
  */
 
+/**
+ * Direct call wrapper for the Google Gemini API using the official SDK.
+ *
+ * @param message - The user's query or message.
+ * @param systemPrompt - The system prompt containing persona constraints and user carbon context.
+ * @returns A promise that resolves to the generated coach response text.
+ * @throws {Error} If the GEMINI_API_KEY environment variable is missing, the API call fails,
+ *                 or the returned content is empty.
+ */
 export async function callGemini(
   message: string,
   systemPrompt: string
@@ -29,7 +38,7 @@ export async function callGemini(
       throw new Error('Received empty response from Gemini.');
     }
     return responseText;
-  } catch (error) {
+  } catch (error: unknown) {
     throw new Error(`Gemini direct API call failed: ${error instanceof Error ? error.message : String(error)}`);
   }
 }
