@@ -8,9 +8,9 @@ export default function LoadingSpinner({ size = 'md', text }: { size?: 'sm' | 'm
   return (
     <div className="flex flex-col items-center justify-center gap-3" role="status" aria-label={text ?? 'Loading'}>
       <div
-        className={`animate-spin rounded-full border-emerald-500/30 border-t-emerald-500 ${sizeClasses[size]}`}
+        className={`animate-spin rounded-full border-emerald-200 border-t-emerald-500 ${sizeClasses[size]}`}
       />
-      {text && <p className="text-sm text-slate-400">{text}</p>}
+      {text && <p className="text-sm text-slate-500">{text}</p>}
     </div>
   );
 }

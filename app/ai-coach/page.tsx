@@ -44,7 +44,6 @@ export default function AiCoachPage() {
 
     const history = getChatHistory();
     if (history.length === 0) {
-      // Welcome message
       const welcome: ChatMessage = {
         id: 'welcome',
         role: 'assistant',
@@ -116,7 +115,7 @@ export default function AiCoachPage() {
     setIsLoading(true);
     try {
       const carbonResult = getCarbonResult() || DEFAULT_CARBON_RESULT;
-      
+
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
@@ -185,36 +184,37 @@ export default function AiCoachPage() {
       <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col">
         {/* Banner at top if no carbon data */}
         {!hasCarbonData && (
-          <div className="mb-4 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-emerald-400 flex items-center justify-between gap-4">
+          <div className="mb-4 flex items-center justify-between gap-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-700">
             <div className="flex items-center gap-2">
               <span className="text-xl">💡</span>
               <span className="text-sm font-medium">
-                For personalized advice, add your carbon data first.
+                For personalised advice, add your carbon data first.
               </span>
             </div>
             <Link
               href="/calculator"
-              className="shrink-0 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 px-4 py-2 text-xs font-bold text-white shadow-md shadow-emerald-500/25 hover:shadow-emerald-500/45 transition-all"
+              className="shrink-0 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 px-4 py-2 text-xs font-bold text-white shadow-md shadow-emerald-500/25 transition-all hover:shadow-emerald-500/40"
             >
               Go to Calculator
             </Link>
           </div>
         )}
+
         {/* Header */}
         <div className="animate-fade-in-up mb-6">
           <div className="flex items-center justify-between">
             <div>
-              <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-400">
+              <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-semibold text-emerald-700">
                 🤖 AI Coach
               </div>
-              <h1 className="text-2xl font-bold text-white sm:text-3xl">
+              <h1 className="text-2xl font-extrabold text-slate-900 sm:text-3xl">
                 Your Sustainability <span className="gradient-text">Coach</span>
               </h1>
             </div>
             {messages.length > 1 && (
               <button
                 onClick={handleClearChat}
-                className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-slate-400 transition-all hover:border-red-500/30 hover:text-red-400"
+                className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-500 transition-all hover:border-red-200 hover:text-red-500"
                 aria-label="Clear chat history"
               >
                 🗑️ Clear
@@ -226,7 +226,7 @@ export default function AiCoachPage() {
         {/* Chat area */}
         <div
           ref={scrollRef}
-          className="animate-fade-in flex-1 overflow-y-auto rounded-2xl border border-white/10 bg-slate-900/50 p-4"
+          className="animate-fade-in flex-1 overflow-y-auto rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
           role="log"
           aria-live="polite"
           aria-label="Chat messages"
@@ -237,7 +237,7 @@ export default function AiCoachPage() {
           ))}
           {isLoading && <TypingIndicator />}
           {error && !isLoading && (
-            <div className="mb-4 rounded-lg border border-red-500/20 bg-red-500/10 p-3 text-sm text-red-400" role="alert" aria-live="polite">
+            <div className="mb-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-600" role="alert" aria-live="polite">
               ⚠️ {error}
             </div>
           )}
@@ -250,7 +250,7 @@ export default function AiCoachPage() {
               <button
                 key={suggestion}
                 onClick={() => handleSend(suggestion)}
-                className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-400 transition-all hover:border-emerald-500/30 hover:text-emerald-400"
+                className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition-all hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700"
                 aria-label={`Ask: ${suggestion}`}
               >
                 {suggestion}
@@ -273,13 +273,13 @@ export default function AiCoachPage() {
             placeholder="Ask about sustainability, tips, or your footprint..."
             disabled={isLoading}
             aria-label="Type your message"
-            className="flex-1 rounded-2xl border border-white/10 bg-slate-800/50 px-5 py-3.5 text-sm text-white placeholder-slate-500 outline-none transition-all focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 disabled:opacity-50"
+            className="flex-1 rounded-2xl border border-slate-200 bg-white px-5 py-3.5 text-sm text-slate-900 placeholder-slate-400 outline-none transition-all focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={isLoading || !input.trim()}
             aria-label="Send message"
-            className="rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 px-6 py-3.5 font-semibold text-white transition-all hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/25 disabled:opacity-50 disabled:hover:scale-100"
+            className="rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 px-6 py-3.5 font-bold text-white transition-all hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/25 disabled:opacity-50 disabled:hover:scale-100"
           >
             {isLoading ? '...' : '→'}
           </button>

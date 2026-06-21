@@ -19,14 +19,14 @@ export default function ChallengeCard({ challenge, progress, onToggleToday }: Ch
 
   return (
     <div
-      className={`group relative overflow-hidden rounded-2xl border transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-emerald-500/10 ${
+      className={`group relative overflow-hidden rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${
         isCompletedToday
-          ? 'border-emerald-500/40 bg-emerald-500/5'
-          : 'border-white/10 bg-slate-800/50'
+          ? 'border-emerald-200 bg-emerald-50/50'
+          : 'border-slate-200 bg-white'
       }`}
     >
       {/* Category indicator */}
-      <div className="absolute left-0 top-0 h-full w-1" style={{ backgroundColor: categoryColor }} />
+      <div className="absolute left-0 top-0 h-full w-1 rounded-l-2xl" style={{ backgroundColor: categoryColor }} />
 
       <div className="p-5 pl-6">
         {/* Header */}
@@ -36,38 +36,37 @@ export default function ChallengeCard({ challenge, progress, onToggleToday }: Ch
               {challenge.icon}
             </span>
             <div>
-              <h2 className="font-semibold text-white">{challenge.title}</h2>
+              <h2 className="font-bold text-slate-900">{challenge.title}</h2>
               <span
-                className="inline-block rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider"
-                style={{ backgroundColor: `${categoryColor}20`, color: categoryColor }}
+                className="inline-block rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider"
+                style={{ backgroundColor: `${categoryColor}18`, color: categoryColor }}
               >
                 {challenge.category}
               </span>
             </div>
           </div>
-          {/* Streak badge */}
           {currentStreak > 0 && (
-            <div className="flex items-center gap-1 rounded-full bg-amber-500/20 px-2.5 py-1 text-xs font-bold text-amber-400">
+            <div className="flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-700">
               🔥 {currentStreak}
             </div>
           )}
         </div>
 
         {/* Description */}
-        <p className="mb-4 text-sm leading-relaxed text-slate-400">{challenge.description}</p>
+        <p className="mb-4 text-sm leading-relaxed text-slate-500">{challenge.description}</p>
 
         {/* Estimated savings */}
         <div className="mb-4 text-xs text-slate-500">
-          Saves ~<span className="font-semibold text-emerald-400">{challenge.estimatedSavingsKg} kg</span> CO₂ per week
+          Saves ~<span className="font-bold text-emerald-600">{challenge.estimatedSavingsKg} kg</span> CO₂ per week
         </div>
 
         {/* Progress bar */}
         <div className="mb-3">
-          <div className="mb-1 flex items-center justify-between text-xs text-slate-400">
+          <div className="mb-1 flex items-center justify-between text-xs text-slate-500">
             <span>{completedCount}/{challenge.durationDays} days</span>
             <span>{progressPercent.toFixed(0)}%</span>
           </div>
-          <div className="h-2 overflow-hidden rounded-full bg-slate-700/50">
+          <div className="h-2 overflow-hidden rounded-full bg-slate-100">
             <div
               className="h-full rounded-full transition-all duration-500 ease-out"
               style={{
@@ -86,10 +85,10 @@ export default function ChallengeCard({ challenge, progress, onToggleToday }: Ch
               ? `Undo today's completion of ${challenge.title}`
               : `Mark ${challenge.title} as completed today`
           }
-          className={`w-full rounded-xl py-2.5 text-sm font-semibold transition-all duration-200 ${
+          className={`w-full rounded-xl py-2.5 text-sm font-bold transition-all duration-200 ${
             isCompletedToday
-              ? 'bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30'
-              : 'bg-white/5 text-slate-300 hover:bg-emerald-500/20 hover:text-emerald-400'
+              ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200'
+              : 'bg-slate-50 text-slate-600 hover:bg-emerald-50 hover:text-emerald-700'
           }`}
         >
           {isCompletedToday ? '✅ Done Today!' : '☐ Mark as Done'}

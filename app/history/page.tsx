@@ -26,19 +26,19 @@ export default function HistoryPage() {
     switch (cat) {
       case 'low':
         return (
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 text-xs font-semibold text-emerald-400">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-xs font-bold text-emerald-700">
             Low 🟢
           </span>
         );
       case 'medium':
         return (
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 text-xs font-semibold text-amber-400">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-0.5 text-xs font-bold text-amber-700">
             Medium 🟡
           </span>
         );
       case 'high':
         return (
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-red-500/10 border border-red-500/20 px-2.5 py-0.5 text-xs font-semibold text-red-400">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-red-200 bg-red-50 px-2.5 py-0.5 text-xs font-bold text-red-700">
             High 🔴
           </span>
         );
@@ -58,21 +58,21 @@ export default function HistoryPage() {
       <div className="mx-auto max-w-4xl">
         {/* Header */}
         <div className="animate-fade-in-up mb-10">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-400">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-semibold text-emerald-700">
             📈 Timeline
           </div>
-          <h1 className="mb-2 text-3xl font-bold text-white sm:text-4xl">
+          <h1 className="mb-2 text-3xl font-extrabold text-slate-900 sm:text-4xl">
             My Carbon <span className="gradient-text">Journey</span>
           </h1>
-          <p className="text-slate-400">Track your emissions over time</p>
+          <p className="text-slate-600">Track your emissions over time</p>
         </div>
 
         {/* 0 entries Empty State */}
         {history.length === 0 && (
-          <div className="animate-fade-in-up glass-card p-12 text-center" style={{ animationDelay: '0.15s' }}>
-            <div className="mb-6 text-7xl text-emerald-500/20">📉</div>
-            <h2 className="mb-3 text-xl font-bold text-white">No History Yet</h2>
-            <p className="mb-8 mx-auto max-w-md text-slate-400">
+          <div className="animate-fade-in-up rounded-2xl border border-slate-200 bg-white p-12 text-center shadow-sm" style={{ animationDelay: '0.15s' }}>
+            <div className="mb-6 text-7xl opacity-30">📉</div>
+            <h2 className="mb-3 text-xl font-bold text-slate-900">No History Yet</h2>
+            <p className="mx-auto mb-8 max-w-md text-slate-600">
               No history yet. Complete the calculator to begin tracking your carbon journey.
             </p>
             <Link
@@ -87,22 +87,22 @@ export default function HistoryPage() {
         {/* 1 entry State */}
         {history.length === 1 && (
           <div className="animate-fade-in-up space-y-6" style={{ animationDelay: '0.15s' }}>
-            <div className="glass-card p-8 text-center max-w-md mx-auto">
-              <p className="mb-2 text-sm text-slate-400">Your First Carbon Score</p>
-              <p className="mb-4 text-5xl font-extrabold text-white">
+            <div className="mx-auto max-w-md rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
+              <p className="mb-2 text-sm text-slate-500">Your First Carbon Score</p>
+              <p className="mb-4 text-5xl font-extrabold text-slate-900">
                 {Math.round(history[0].totalKg).toLocaleString('en-IN')}{' '}
                 <span className="text-lg font-normal text-slate-500">kg CO₂/yr</span>
               </p>
               <div className="mb-6 flex justify-center">{getCategoryBadge(history[0].totalKg)}</div>
-              <div className="rounded-lg bg-slate-800/50 p-4 border border-white/5 text-sm text-slate-300">
+              <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 text-sm text-slate-700">
                 Submit the calculator again next week to see your progress trend.
               </div>
             </div>
 
-            <div className="flex justify-center mt-6">
+            <div className="mt-6 flex justify-center">
               <Link
                 href="/calculator"
-                className="rounded-xl border border-white/10 bg-white/5 px-6 py-2.5 text-sm font-semibold text-emerald-400 transition-all hover:bg-white/10"
+                className="rounded-xl border border-slate-200 bg-white px-6 py-2.5 text-sm font-bold text-emerald-600 transition-all hover:bg-emerald-50"
               >
                 Submit New Calculation
               </Link>
@@ -123,27 +123,27 @@ export default function HistoryPage() {
 
               if (latest < previous) {
                 return (
-                  <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-emerald-400 flex items-center gap-3">
+                  <div className="flex items-center gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-700">
                     <span className="text-xl">🎉</span>
-                    <span className="text-sm font-medium">
+                    <span className="text-sm font-semibold">
                       Your emissions dropped by {diffKg} kg ({diffPercent}%) since last entry!
                     </span>
                   </div>
                 );
               } else if (latest > previous) {
                 return (
-                  <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 p-4 text-amber-400 flex items-center gap-3">
+                  <div className="flex items-center gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-700">
                     <span className="text-xl">📈</span>
-                    <span className="text-sm font-medium">
+                    <span className="text-sm font-semibold">
                       Your emissions increased by {diffKg} kg ({diffPercent}%). Check AI Coach for tips.
                     </span>
                   </div>
                 );
               } else {
                 return (
-                  <div className="rounded-2xl border border-slate-700 bg-slate-800/50 p-4 text-slate-300 flex items-center gap-3">
+                  <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-600">
                     <span className="text-xl">➡️</span>
-                    <span className="text-sm font-medium">
+                    <span className="text-sm font-semibold">
                       No change since last entry (0.0% variance).
                     </span>
                   </div>
@@ -152,8 +152,8 @@ export default function HistoryPage() {
             })()}
 
             {/* Line Chart */}
-            <div className="glass-card p-6">
-              <h2 className="mb-4 text-lg font-semibold text-white">Carbon Timeline</h2>
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-4 text-lg font-bold text-slate-900">Carbon Timeline</h2>
               <div className="h-72 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart
@@ -163,7 +163,7 @@ export default function HistoryPage() {
                     }))}
                     margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
                   >
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
                     <XAxis
                       dataKey="date"
                       stroke="#94A3B8"
@@ -179,11 +179,12 @@ export default function HistoryPage() {
                     />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: '#1E293B',
-                        border: '1px solid rgba(255,255,255,0.1)',
+                        backgroundColor: '#FFFFFF',
+                        border: '1px solid #E2E8F0',
                         borderRadius: '0.75rem',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
                       }}
-                      labelStyle={{ color: '#F8FAFC', fontWeight: 'bold' }}
+                      labelStyle={{ color: '#0F172A', fontWeight: 'bold' }}
                       itemStyle={{ color: '#10B981' }}
                     />
                     <Line
@@ -200,33 +201,33 @@ export default function HistoryPage() {
             </div>
 
             {/* History Table */}
-            <div className="glass-card overflow-hidden">
-              <div className="px-6 py-4 border-b border-white/5">
-                <h2 className="text-lg font-semibold text-white">History Details</h2>
+            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <div className="border-b border-slate-100 px-6 py-4">
+                <h2 className="text-lg font-bold text-slate-900">History Details</h2>
               </div>
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-slate-300">
-                  <thead className="bg-slate-800/40 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                <table className="w-full text-left text-slate-700">
+                  <thead className="bg-slate-50 text-xs font-bold uppercase tracking-wider text-slate-500">
                     <tr>
                       <th className="px-6 py-4">Date</th>
                       <th className="px-6 py-4">Total CO₂</th>
                       <th className="px-6 py-4 text-center">Category</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5">
+                  <tbody className="divide-y divide-slate-100">
                     {history.map((entry, index) => (
-                      <tr key={index} className="hover:bg-white/[0.02] transition-colors">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">
+                      <tr key={index} className="transition-colors hover:bg-slate-50">
+                        <td className="whitespace-nowrap px-6 py-4 text-sm">
                           {new Date(entry.date).toLocaleDateString('en-IN', {
                             day: '2-digit',
                             month: 'long',
                             year: 'numeric',
                           })}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-white">
+                        <td className="whitespace-nowrap px-6 py-4 text-sm font-bold text-slate-900">
                           {Math.round(entry.totalKg).toLocaleString('en-IN')} kg/year
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-center">
+                        <td className="whitespace-nowrap px-6 py-4 text-center">
                           {getCategoryBadge(entry.totalKg)}
                         </td>
                       </tr>

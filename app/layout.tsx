@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Sora } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
-const inter = Inter({
+const sora = Sora({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-sora',
   display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
 });
 
 export const metadata: Metadata = {
@@ -29,8 +30,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="flex min-h-screen flex-col bg-[#0B1120] font-sans text-slate-100 antialiased">
+    <html lang="en" className={sora.variable}>
+      <body className="flex min-h-screen flex-col bg-[#F8FCFA] font-sans text-slate-900 antialiased">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-emerald-600 focus:text-white focus:rounded"

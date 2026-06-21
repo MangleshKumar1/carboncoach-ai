@@ -29,14 +29,11 @@ export default function ReportPage() {
       const challenges = getChallengeProgressList();
       const rawResponse = await generateWeeklyReport(carbonData, challenges);
 
-      // Parse JSON response
       let parsed: { wins: string[]; losses: string[]; recommendations: string[]; overallScore: number };
       try {
-        // Clean the response — remove markdown code fences if present
         const cleaned = rawResponse.replace(/```json?\n?/g, '').replace(/```/g, '').trim();
         parsed = JSON.parse(cleaned);
       } catch {
-        // Fallback if JSON parsing fails
         parsed = {
           wins: ['Report generated successfully'],
           losses: ['Could not parse structured data'],
@@ -72,8 +69,8 @@ export default function ReportPage() {
       <div className="flex min-h-screen items-center justify-center px-4">
         <div className="animate-fade-in-up text-center">
           <div className="mb-6 text-7xl">📋</div>
-          <h1 className="mb-3 text-2xl font-bold text-white">Complete the calculator to generate your report.</h1>
-          <p className="mb-8 max-w-md text-slate-400">
+          <h1 className="mb-3 text-2xl font-bold text-slate-900">Complete the calculator to generate your report.</h1>
+          <p className="mb-8 max-w-md text-slate-600">
             We need your carbon footprint data before generating a weekly sustainability analysis.
           </p>
           <Link
@@ -93,13 +90,13 @@ export default function ReportPage() {
       <div className="mx-auto max-w-3xl">
         {/* Header */}
         <div className="animate-fade-in-up mb-10">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-400">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-semibold text-emerald-700">
             📋 Weekly Report
           </div>
-          <h1 className="mb-2 text-3xl font-bold text-white sm:text-4xl">
+          <h1 className="mb-2 text-3xl font-extrabold text-slate-900 sm:text-4xl">
             Sustainability <span className="gradient-text">Report</span>
           </h1>
-          <p className="text-slate-400">
+          <p className="text-slate-600">
             AI-generated insights on your sustainability journey — wins, areas for improvement, and next steps.
           </p>
         </div>
@@ -110,7 +107,7 @@ export default function ReportPage() {
             onClick={handleGenerateReport}
             disabled={generating}
             aria-label="Generate weekly sustainability report"
-            className="w-full rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-emerald-500/25 transition-all duration-300 hover:scale-[1.02] hover:shadow-emerald-500/40 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-emerald-500/25 transition-all duration-300 hover:scale-[1.02] hover:shadow-emerald-500/40 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {generating ? (
               <span className="flex items-center justify-center gap-3">
@@ -122,7 +119,7 @@ export default function ReportPage() {
             )}
           </button>
           {error && (
-            <div className="mt-4 rounded-lg border border-red-500/20 bg-red-500/10 p-3 text-sm text-red-400" role="alert">
+            <div className="mt-4 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-600" role="alert">
               ⚠️ {error}
             </div>
           )}
@@ -136,8 +133,8 @@ export default function ReportPage() {
         ) : latestReport ? (
           <div className="animate-fade-in-up space-y-6" style={{ animationDelay: '0.15s' }}>
             {/* Score */}
-            <div className="glass-card p-6 text-center">
-              <p className="mb-2 text-sm text-slate-400">Sustainability Score</p>
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
+              <p className="mb-2 text-sm font-semibold text-slate-500">Sustainability Score</p>
               <div className="relative mx-auto mb-4 flex h-32 w-32 items-center justify-center">
                 <svg className="absolute h-full w-full -rotate-90" viewBox="0 0 100 100">
                   <circle
@@ -145,7 +142,7 @@ export default function ReportPage() {
                     cy="50"
                     r="42"
                     fill="none"
-                    stroke="rgba(255,255,255,0.1)"
+                    stroke="#E2E8F0"
                     strokeWidth="8"
                   />
                   <circle
@@ -166,10 +163,11 @@ export default function ReportPage() {
                     className="transition-all duration-1000"
                   />
                 </svg>
-                <span className="text-3xl font-bold text-white">{latestReport.overallScore}</span>
+                <span className="text-3xl font-extrabold text-slate-900">{latestReport.overallScore}</span>
               </div>
               <p className="text-xs text-slate-500">
-                Generated on {new Date(latestReport.generatedAt).toLocaleDateString('en-IN', {
+                Generated on{' '}
+                {new Date(latestReport.generatedAt).toLocaleDateString('en-IN', {
                   weekday: 'long',
                   year: 'numeric',
                   month: 'long',
@@ -179,14 +177,14 @@ export default function ReportPage() {
             </div>
 
             {/* Wins */}
-            <div className="glass-card p-6">
-              <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-emerald-400">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-emerald-700">
                 🎉 Wins
               </h2>
               <ul className="space-y-3">
                 {latestReport.wins.map((win, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-slate-300">
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-xs text-emerald-400">
+                  <li key={i} className="flex items-start gap-3 text-sm text-slate-700">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700">
                       ✓
                     </span>
                     {win}
@@ -196,14 +194,14 @@ export default function ReportPage() {
             </div>
 
             {/* Losses */}
-            <div className="glass-card p-6">
-              <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-amber-400">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-amber-700">
                 ⚠️ Areas to Improve
               </h2>
               <ul className="space-y-3">
                 {latestReport.losses.map((loss, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-slate-300">
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-500/20 text-xs text-amber-400">
+                  <li key={i} className="flex items-start gap-3 text-sm text-slate-700">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-100 text-xs font-bold text-amber-700">
                       !
                     </span>
                     {loss}
@@ -213,14 +211,14 @@ export default function ReportPage() {
             </div>
 
             {/* Recommendations */}
-            <div className="glass-card p-6">
-              <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-blue-400">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-blue-700">
                 💡 Recommendations
               </h2>
               <ul className="space-y-3">
                 {latestReport.recommendations.map((rec, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-slate-300">
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-500/20 text-xs text-blue-400">
+                  <li key={i} className="flex items-start gap-3 text-sm text-slate-700">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-blue-700">
                       →
                     </span>
                     {rec}
@@ -230,10 +228,10 @@ export default function ReportPage() {
             </div>
           </div>
         ) : (
-          <div className="animate-fade-in-up text-center py-16" style={{ animationDelay: '0.15s' }}>
+          <div className="animate-fade-in-up py-16 text-center" style={{ animationDelay: '0.15s' }}>
             <div className="mb-6 text-7xl">📋</div>
-            <h2 className="mb-3 text-xl font-bold text-white">No Reports Yet</h2>
-            <p className="mb-4 max-w-md mx-auto text-slate-400">
+            <h2 className="mb-3 text-xl font-bold text-slate-900">No Reports Yet</h2>
+            <p className="mx-auto mb-4 max-w-md text-slate-600">
               Click the button above to generate your first AI-powered sustainability report based on your carbon data and challenge progress.
             </p>
           </div>
@@ -242,29 +240,29 @@ export default function ReportPage() {
         {/* Report History */}
         {reports.length > 1 && (
           <div className="mt-10">
-            <h2 className="mb-4 text-lg font-semibold text-white">Past Reports</h2>
+            <h2 className="mb-4 text-lg font-bold text-slate-900">Past Reports</h2>
             <div className="space-y-3">
               {reports.slice(1).map((report) => (
-                <div key={report.id} className="glass-card flex items-center justify-between p-4">
+                <div key={report.id} className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
                   <div>
-                    <p className="text-sm font-medium text-white">
+                    <p className="text-sm font-semibold text-slate-900">
                       {new Date(report.generatedAt).toLocaleDateString('en-IN', {
                         month: 'short',
                         day: 'numeric',
                         year: 'numeric',
                       })}
                     </p>
-                    <p className="text-xs text-slate-400">
-                      Score: {report.overallScore}/100 • {report.wins.length} wins • {report.recommendations.length} tips
+                    <p className="text-xs text-slate-500">
+                      Score: {report.overallScore}/100 · {report.wins.length} wins · {report.recommendations.length} tips
                     </p>
                   </div>
                   <div
                     className={`rounded-full px-3 py-1 text-sm font-bold ${
                       report.overallScore >= 70
-                        ? 'bg-emerald-500/20 text-emerald-400'
+                        ? 'bg-emerald-100 text-emerald-700'
                         : report.overallScore >= 40
-                        ? 'bg-amber-500/20 text-amber-400'
-                        : 'bg-red-500/20 text-red-400'
+                        ? 'bg-amber-100 text-amber-700'
+                        : 'bg-red-100 text-red-700'
                     }`}
                   >
                     {report.overallScore}

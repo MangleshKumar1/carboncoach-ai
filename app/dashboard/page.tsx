@@ -39,9 +39,9 @@ export default function DashboardPage() {
       <div className="flex min-h-screen items-center justify-center px-4">
         <div className="animate-fade-in-up text-center">
           <div className="mb-6 text-7xl">📊</div>
-          <h1 className="mb-3 text-2xl font-bold text-white">{"You haven't calculated your footprint yet."}</h1>
-          <p className="mb-8 max-w-md text-slate-400">
-            Complete the carbon footprint calculator to view your personalized dashboard and category analysis.
+          <h1 className="mb-3 text-2xl font-bold text-slate-900">{"You haven't calculated your footprint yet."}</h1>
+          <p className="mb-8 max-w-md text-slate-600">
+            Complete the carbon footprint calculator to view your personalised dashboard and category analysis.
           </p>
           <Link
             href="/calculator"
@@ -60,13 +60,13 @@ export default function DashboardPage() {
       <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="animate-fade-in-up mb-10">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-400">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-semibold text-emerald-700">
             📊 Dashboard
           </div>
-          <h1 className="mb-2 text-3xl font-bold text-white sm:text-4xl">
+          <h1 className="mb-2 text-3xl font-extrabold text-slate-900 sm:text-4xl">
             Your Carbon <span className="gradient-text">Dashboard</span>
           </h1>
-          <p className="text-slate-400">
+          <p className="text-slate-600">
             A comprehensive view of your annual carbon footprint with category breakdowns.
           </p>
         </div>
@@ -78,11 +78,11 @@ export default function DashboardPage() {
           </div>
 
           {/* Monthly Score Card */}
-          <div className="animate-fade-in-up glass-card p-6" style={{ animationDelay: '0.15s' }}>
-            <h2 className="mb-4 text-sm font-medium text-slate-400">Monthly Breakdown</h2>
+          <div className="animate-fade-in-up rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" style={{ animationDelay: '0.15s' }}>
+            <h2 className="mb-4 text-sm font-semibold text-slate-500">Monthly Breakdown</h2>
             <div className="mb-6 flex items-baseline gap-2">
-              <span className="text-4xl font-bold text-white">{result.monthlyKg.toLocaleString()}</span>
-              <span className="text-sm text-slate-400">kg CO₂/month</span>
+              <span className="text-4xl font-extrabold text-slate-900">{result.monthlyKg.toLocaleString()}</span>
+              <span className="text-sm text-slate-500">kg CO₂/month</span>
             </div>
 
             <div className="space-y-3">
@@ -96,10 +96,10 @@ export default function DashboardPage() {
                     <span className="text-lg">{cat.icon}</span>
                     <div className="flex-1">
                       <div className="mb-1 flex items-center justify-between text-sm">
-                        <span className="text-slate-300">{cat.label}</span>
-                        <span className="font-medium text-white">{value.toLocaleString()} kg</span>
+                        <span className="text-slate-600">{cat.label}</span>
+                        <span className="font-semibold text-slate-900">{value.toLocaleString()} kg</span>
                       </div>
-                      <div className="h-1.5 overflow-hidden rounded-full bg-slate-700/50">
+                      <div className="h-1.5 overflow-hidden rounded-full bg-slate-100">
                         <div
                           className="h-full rounded-full transition-all duration-1000 ease-out"
                           style={{
@@ -109,7 +109,7 @@ export default function DashboardPage() {
                         />
                       </div>
                     </div>
-                    <span className="w-12 text-right text-xs text-slate-500">{percent}%</span>
+                    <span className="w-12 text-right text-xs text-slate-400">{percent}%</span>
                   </div>
                 );
               })}
@@ -118,9 +118,9 @@ export default function DashboardPage() {
         </div>
 
         {/* Donut Chart */}
-        <div className="animate-fade-in-up mt-6 glass-card p-6" style={{ animationDelay: '0.2s' }}>
-          <h2 className="mb-2 text-lg font-semibold text-white">Emissions Breakdown</h2>
-          <p className="mb-4 text-sm text-slate-400">Visual distribution of your carbon footprint by category</p>
+        <div className="animate-fade-in-up mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" style={{ animationDelay: '0.2s' }}>
+          <h2 className="mb-2 text-lg font-bold text-slate-900">Emissions Breakdown</h2>
+          <p className="mb-4 text-sm text-slate-500">Visual distribution of your carbon footprint by category</p>
           <CarbonDonutChart breakdown={result.breakdown} totalKg={result.totalKgPerYear} />
         </div>
 
@@ -128,35 +128,35 @@ export default function DashboardPage() {
         <div className="animate-fade-in-up mt-6 grid gap-4 sm:grid-cols-3" style={{ animationDelay: '0.25s' }}>
           <Link
             href="/calculator"
-            className="glass-card flex items-center gap-3 p-4 transition-all duration-200 hover:scale-[1.02] hover:border-emerald-500/30"
+            className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-md"
             aria-label="Recalculate carbon footprint"
           >
             <span className="text-2xl">🔄</span>
             <div>
-              <p className="font-medium text-white">Recalculate</p>
-              <p className="text-xs text-slate-400">Update your inputs</p>
+              <p className="font-semibold text-slate-900">Recalculate</p>
+              <p className="text-xs text-slate-500">Update your inputs</p>
             </div>
           </Link>
           <Link
             href="/challenges"
-            className="glass-card flex items-center gap-3 p-4 transition-all duration-200 hover:scale-[1.02] hover:border-emerald-500/30"
+            className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-md"
             aria-label="Start sustainability challenges"
           >
             <span className="text-2xl">🏆</span>
             <div>
-              <p className="font-medium text-white">Start Challenges</p>
-              <p className="text-xs text-slate-400">Reduce your footprint</p>
+              <p className="font-semibold text-slate-900">Start Challenges</p>
+              <p className="text-xs text-slate-500">Reduce your footprint</p>
             </div>
           </Link>
           <Link
             href="/ai-coach"
-            className="glass-card flex items-center gap-3 p-4 transition-all duration-200 hover:scale-[1.02] hover:border-emerald-500/30"
+            className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-md"
             aria-label="Ask AI Coach for tips"
           >
             <span className="text-2xl">🤖</span>
             <div>
-              <p className="font-medium text-white">Ask AI Coach</p>
-              <p className="text-xs text-slate-400">Get personalized tips</p>
+              <p className="font-semibold text-slate-900">Ask AI Coach</p>
+              <p className="text-xs text-slate-500">Get personalised tips</p>
             </div>
           </Link>
         </div>

@@ -62,10 +62,10 @@ function CustomTooltip({ active, payload }: { active?: boolean; payload?: Toolti
   if (!active || !payload?.length) return null;
   const item = payload[0];
   return (
-    <div className="rounded-lg border border-white/10 bg-slate-800/95 px-3 py-2 shadow-xl backdrop-blur-sm">
-      <p className="text-sm font-medium text-white">{item.name}</p>
-      <p className="text-sm text-slate-300">
-        <span className="font-semibold" style={{ color: item.payload.fill }}>
+    <div className="rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-lg">
+      <p className="text-sm font-semibold text-slate-900">{item.name}</p>
+      <p className="text-sm text-slate-600">
+        <span className="font-bold" style={{ color: item.payload.fill }}>
           {item.value.toLocaleString()}
         </span>{' '}
         kg CO₂/year
@@ -108,7 +108,7 @@ export default function CarbonDonutChart({ breakdown, totalKg }: CarbonDonutChar
             verticalAlign="bottom"
             iconType="circle"
             iconSize={10}
-            formatter={(value: string) => <span className="text-sm text-slate-300">{value}</span>}
+            formatter={(value: string) => <span className="text-sm text-slate-600">{value}</span>}
           />
         </PieChart>
       </ResponsiveContainer>
@@ -116,8 +116,8 @@ export default function CarbonDonutChart({ breakdown, totalKg }: CarbonDonutChar
       {/* Center label */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center" style={{ marginTop: '-24px' }}>
         <div className="text-center">
-          <p className="text-2xl font-bold text-white">{totalKg.toLocaleString()}</p>
-          <p className="text-xs text-slate-400">kg CO₂/yr</p>
+          <p className="text-2xl font-extrabold text-slate-900">{totalKg.toLocaleString()}</p>
+          <p className="text-xs text-slate-500">kg CO₂/yr</p>
         </div>
       </div>
     </div>

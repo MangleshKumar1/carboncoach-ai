@@ -1,0 +1,11 @@
+
+● It's a Next.js project. Here are the steps:
+
+  1. Open terminal and navigate to the project folder:
+  cd "D:\CarbonCoach AI\carboncoach-ai"
+  2. Run the dev server:
+  npm run dev
+  3. Open your browser and go to:
+  http://localhost:3000
+
+  That's it. The app will be live at localhost:3000.

@@ -102,28 +102,27 @@ export default function CalculatorPage() {
       <div className="mx-auto max-w-2xl">
         {/* Header */}
         <div className="animate-fade-in-up mb-10 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-400">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-semibold text-emerald-700">
             🧮 Carbon Calculator
           </div>
-          <h1 className="mb-3 text-3xl font-bold text-white sm:text-4xl">
+          <h1 className="mb-3 text-3xl font-extrabold text-slate-900 sm:text-4xl">
             Calculate Your <span className="gradient-text">Carbon Footprint</span>
           </h1>
-          <p className="text-slate-400">
+          <p className="text-slate-600">
             Answer a few questions about your lifestyle to estimate your annual CO₂ emissions.
           </p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="animate-fade-in-up space-y-8" style={{ animationDelay: '0.15s' }}>
+        <form onSubmit={handleSubmit} className="animate-fade-in-up space-y-6" style={{ animationDelay: '0.15s' }}>
           {/* ── Transport ── */}
-          <div className="glass-card p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-900">
               🚗 Transport
             </h2>
 
-            {/* Mode selector */}
             <div className="mb-4">
-              <label className="mb-2 block text-sm font-medium text-slate-300">Primary mode of transport</label>
+              <label className="mb-2 block text-sm font-semibold text-slate-700">Primary mode of transport</label>
               <div className="grid grid-cols-3 gap-3" role="radiogroup" aria-label="Select transport mode">
                 {TRANSPORT_MODES.map((mode) => (
                   <button
@@ -135,13 +134,13 @@ export default function CalculatorPage() {
                     onClick={() => setTransportMode(mode.value)}
                     className={`rounded-xl border p-3 text-center transition-all duration-200 ${
                       transportMode === mode.value
-                        ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-400'
-                        : 'border-white/10 bg-slate-800/30 text-slate-400 hover:border-white/20'
+                        ? 'border-emerald-400 bg-emerald-50 text-emerald-700 shadow-sm'
+                        : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50'
                     }`}
                   >
-                    <span className="text-2xl block mb-1">{mode.icon}</span>
-                    <span className="text-sm font-medium block">{mode.label}</span>
-                    <span className="text-[10px] block text-slate-500">{mode.desc}</span>
+                    <span className="block text-2xl mb-1">{mode.icon}</span>
+                    <span className="block text-sm font-semibold">{mode.label}</span>
+                    <span className="block text-[10px] text-slate-400">{mode.desc}</span>
                   </button>
                 ))}
               </div>
@@ -162,8 +161,8 @@ export default function CalculatorPage() {
           </div>
 
           {/* ── Electricity ── */}
-          <div className="glass-card p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-900">
               ⚡ Electricity
             </h2>
             <InputField
@@ -181,11 +180,11 @@ export default function CalculatorPage() {
           </div>
 
           {/* ── Food ── */}
-          <div className="glass-card p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-900">
               🍽️ Food
             </h2>
-            <label className="mb-2 block text-sm font-medium text-slate-300">Dietary preference</label>
+            <label className="mb-2 block text-sm font-semibold text-slate-700">Dietary preference</label>
             <div className="grid grid-cols-3 gap-3" role="radiogroup" aria-label="Select food type">
               {FOOD_TYPES.map((food) => (
                 <button
@@ -197,21 +196,21 @@ export default function CalculatorPage() {
                   onClick={() => setFoodType(food.value)}
                   className={`rounded-xl border p-3 text-center transition-all duration-200 ${
                     foodType === food.value
-                      ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-400'
-                      : 'border-white/10 bg-slate-800/30 text-slate-400 hover:border-white/20'
+                      ? 'border-emerald-400 bg-emerald-50 text-emerald-700 shadow-sm'
+                      : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50'
                   }`}
                 >
-                  <span className="text-2xl block mb-1">{food.icon}</span>
-                  <span className="text-sm font-medium block">{food.label}</span>
-                  <span className="text-[10px] block text-slate-500">{food.desc}</span>
+                  <span className="block text-2xl mb-1">{food.icon}</span>
+                  <span className="block text-sm font-semibold">{food.label}</span>
+                  <span className="block text-[10px] text-slate-400">{food.desc}</span>
                 </button>
               ))}
             </div>
           </div>
 
           {/* ── Flights ── */}
-          <div className="glass-card p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-900">
               ✈️ Flights
             </h2>
             <InputField
@@ -229,8 +228,8 @@ export default function CalculatorPage() {
           </div>
 
           {/* ── Shopping ── */}
-          <div className="glass-card p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-900">
               🛍️ Shopping
             </h2>
             <InputField
@@ -252,7 +251,7 @@ export default function CalculatorPage() {
             type="submit"
             disabled={saving}
             aria-label="Calculate my carbon footprint"
-            className="w-full rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-emerald-500/25 transition-all duration-300 hover:scale-[1.02] hover:shadow-emerald-500/40 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-emerald-500/25 transition-all duration-300 hover:scale-[1.02] hover:shadow-emerald-500/40 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {saving ? (
               <span className="flex items-center justify-center gap-3">

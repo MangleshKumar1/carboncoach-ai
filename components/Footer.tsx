@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-slate-950/80 backdrop-blur-xl">
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <footer className="border-t border-slate-800 bg-slate-900">
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div>
@@ -22,7 +22,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-300">Navigate</h3>
+            <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-400">Navigate</h3>
             <ul className="space-y-2">
               {[
                 { href: '/calculator', label: 'Calculator' },
@@ -45,7 +45,7 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-300">Learn</h3>
+            <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-400">Learn</h3>
             <ul className="space-y-2 text-sm text-slate-400">
               <li>Carbon Footprint Basics</li>
               <li>India&apos;s Climate Goals</li>
@@ -56,19 +56,20 @@ export default function Footer() {
 
           {/* Stats */}
           <div>
-            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-slate-300">Did You Know?</h3>
+            <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-slate-400">Did You Know?</h3>
             <p className="text-sm leading-relaxed text-slate-400">
-              The average Indian emits <span className="font-semibold text-emerald-400">1.9 tons</span> of CO2 per year — well below the global average of 4.7 tons. Every action counts! 🌱
+              The average Indian emits{' '}
+              <span className="font-semibold text-emerald-400">1.9 tons</span> of CO₂ per year — well below the global average of 4.7 tons. Every action counts! 🌱
             </p>
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-slate-800 pt-6 sm:flex-row">
           <p className="text-xs text-slate-500">
             © {new Date().getFullYear()} CarbonCoach AI. Built for a greener planet 🌍
           </p>
           <p className="text-xs text-slate-500">
-            Powered by Gemini AI • Made in India 🇮🇳
+            Powered by Gemini AI · Made in India 🇮🇳
           </p>
         </div>
       </div>
