@@ -7,12 +7,12 @@ export async function POST(request: NextRequest) {
     const body = await request.json().catch(() => ({}));
     const { message, userData } = body as { message: unknown; userData: unknown };
 
-    // Validate: message must be non-empty string, max 500 chars
+    // Validate: message must be non-empty string, max 2000 chars
     // Validate: userData must be present object
     if (
       typeof message !== 'string' ||
       message.trim() === '' ||
-      message.length > 500 ||
+      message.length > 2000 ||
       !userData ||
       typeof userData !== 'object'
     ) {

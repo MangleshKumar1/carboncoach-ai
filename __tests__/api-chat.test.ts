@@ -68,8 +68,8 @@ describe('POST /api/chat route handler', () => {
     expect(body).toEqual({ error: 'CarbonCoach is taking a break. Try again.' });
   });
 
-  test('POST with message over 500 chars returns 400', async () => {
-    const longMessage = 'a'.repeat(501);
+  test('POST with message over 2000 chars returns 400', async () => {
+    const longMessage = 'a'.repeat(2001);
     const req = new NextRequest('http://localhost:3000/api/chat', {
       method: 'POST',
       body: JSON.stringify({ message: longMessage, userData: mockUserData }),
