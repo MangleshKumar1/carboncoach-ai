@@ -15,10 +15,6 @@ const DEFAULT_CARBON_RESULT: CarbonResult = {
 };
 
 /**
- * Client-side wrapper for getting carbon coach responses via server-side /api/chat route.
- * Prevents client exposure of any AI keys.
- */
-/**
  * Contacts the server-side API endpoint to obtain carbon coaching advice based on user question and current footprint data.
  *
  * @param message - The text of the user's question.

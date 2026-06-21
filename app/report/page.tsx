@@ -8,16 +8,17 @@ import { generateWeeklyReport } from '@/lib/gemini';
 import LoadingSpinner from '@/components/LoadingSpinner';
 
 export default function ReportPage() {
+  const [mounted, setMounted] = useState(false);
   const [reports, setReports] = useState<WeeklyReport[]>([]);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [generating, setGenerating] = useState(false);
-  const [hasCarbonData, setHasCarbonData] = useState(true);
+  const [hasCarbonData, setHasCarbonData] = useState(false);
 
   useEffect(() => {
     setReports(getReports());
     const carbonData = getCarbonResult();
     setHasCarbonData(!!carbonData);
+    setMounted(true);
   }, []);
 
   async function handleGenerateReport() {
@@ -61,11 +62,18 @@ export default function ReportPage() {
       setError(err instanceof Error ? err.message : 'Failed to generate report');
     } finally {
       setGenerating(false);
-      setLoading(false);
     }
   }
 
   const latestReport = reports[0];
+
+  if (!mounted) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <LoadingSpinner size="lg" text="Loading reports..." />
+      </div>
+    );
+  }
 
   if (!hasCarbonData) {
     return (
@@ -129,11 +137,7 @@ export default function ReportPage() {
         </div>
 
         {/* Latest Report */}
-        {loading ? (
-          <div className="flex justify-center py-20">
-            <LoadingSpinner size="lg" text="Loading reports..." />
-          </div>
-        ) : latestReport ? (
+        {latestReport ? (
           <div className="animate-fade-in-up space-y-6" style={{ animationDelay: '0.15s' }}>
             {/* Score */}
             <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
