@@ -74,7 +74,7 @@ export default function ScoreGauge({ totalKg, category, indiaAvgKg = 1900 }: Sco
         <span>0 kg</span>
         <div className="flex items-center gap-1">
           <div className="h-2 w-2 rounded-full bg-white/60" />
-          <span>India Avg: {indiaAvgKg.toLocaleString()} kg</span>
+          <span>India Avg: ~1,900 kg CO₂/person/year</span>
         </div>
         <span>{maxKg.toLocaleString()} kg</span>
       </div>
@@ -87,7 +87,7 @@ export default function ScoreGauge({ totalKg, category, indiaAvgKg = 1900 }: Sco
           </p>
         ) : (
           <p className="text-sm text-amber-400">
-            ⚠️ You&apos;re <span className="font-bold">{(((totalKg / indiaAvgKg) - 1) * 100).toFixed(0)}% above</span> the India average. Let&apos;s work on reducing it!
+            ⚠️ Your estimated lifestyle footprint is <span className="font-bold">{(((totalKg / indiaAvgKg) - 1) * 100).toFixed(0)}% above</span> the average Indian per-person footprint. This calculator includes food, electricity, flights, and shopping, so higher totals can be expected.
           </p>
         )}
       </div>
